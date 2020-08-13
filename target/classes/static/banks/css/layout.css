@@ -1,0 +1,15 @@
+.bg-trade{
+    background-color: #34495e !important;
+    color: white !important;
+
+}
+
+.text-white li a
+{
+    color:white;
+}
+
+li a:focus{
+    background-color:#34495e !important;
+}
+

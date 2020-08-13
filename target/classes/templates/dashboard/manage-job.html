@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+
+
+
+
+<!-- page content -->
+<div class="right_col" role="main" layout:fragment="content">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Report Management</h3>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <ul class="nav navbar-left panel_toolbox">
+                                    <li >
+                                        <div class="col-lg-4">
+                                            <div class="title-action">
+                                                <!--<a  class="btn btn-primary btn-sm bt-select bt-link-act" href="/admin/codes/index/edit" disabled="disabled" ><i class="fa fa-pencil"></i> Edit</a>-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li >
+                                        <div class="col-lg-4">
+                                            <div class="title-action">
+                                                <!--<a id="delete-btn" class="btn btn-danger btn-sm bt-select" href="/admin/codes/index/delete" disabled="disabled" ><i class="fa fa-trash"></i> Delete</a>-->
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                                <ul class="nav navbar-right panel_toolbox">
+
+
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br/><br/> <fieldset>
+                                <div class="form-group">
+                                    <div class="col-md-12 col-sm-6 col-xs-12">
+
+                                        <form method="post" action="/manage/job" class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="datetimepicker" class="control-label col-sm-2 ">Select date and time</label>
+                                                    <div class="col-md-6">
+                                                        <!--                                                            <input class="form-control col-sm-2" type="datetime-local" value="2018-08-19T13:45:00" id="example-datetime-local-input">-->
+                                                        <input id="datetimepicker" type="text" class="form-control" >
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label class="control-label col-sm-2">Email</label>
+                                                    <div class="col-md-6">
+                                                        <input  type="email" th:id="email" th:name="email" class=" form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            &nbsp;&nbsp;
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+
+                                                    <label class="control-label col-sm-2">Repeat</label>
+                                                    <div class="col-sm-6">
+                                                        <select class="form-control">
+                                                            <option value="Yes">Yes</option>
+                                                            <option value="No">No</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            &nbsp;&nbsp;
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label class="control-label col-sm-2">Report category</label>
+                                                    <div class="col-sm-6">
+                                                        <select  onblur="toUpperCase(this)"th:name="category" id="jobCategory"  type="text" required
+                                                                class="form-control inputfield">
+                                                            <option value="">Select</option>
+                                                            <option th:each="report : ${reportlist}"
+                                                                    th:value="${report.fileName}"
+                                                                    th:text="${report.fileName}"></option>
+                                                        </select>
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">Current schedule:</label>
+                                                    <label class="col-sm-2 control-label" id="curentCronExpr"></label>
+
+                                                </div>
+
+                                            </div>
+                                            &nbsp;&nbsp;
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label class="control-label col-sm-2">Reschedule job</label>
+                                                    <div class="col-sm-6">
+                                                        <select class="form-control" th:name="scheduler" th:id="scheduler">
+                                                            <!--<option value="secondsDiv">Second(s)</option>-->
+                                                            <option value="minuteDiv">Miinute(s)</option>
+                                                            <option value="hourDiv">Hourly</option>
+                                                            <option value="dailyDiv">Daily</option>
+                                                            <option value="weekDiv">Weekly</option>
+                                                            <option value="monthDiv">Month</option>
+                                                            <option value="yearDiv">Yearly</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--<div id="secondsDiv" class="schedulingSection">-->
+                                                <!--<div class="form-group">-->
+                                                    <!--<div class="col-md-12">-->
+                                                        <!--<label class="col-sm-2 control-label">Every</label>-->
+
+                                                        <!--<div class="col-sm-2">-->
+                                                            <!--<input th:type="number" th:id="second" th:name="second" min="1" value="5" class="form-control"/>-->
+                                                        <!--</div>-->
+                                                        <!--<label class="col-sm-1 control-label">Second</label>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+
+                                            <div id="minuteDiv" class="schedulingSection">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label">Every</label>
+                                                        <div class="col-sm-2">
+                                                            <input type="number" th:id="minute" th:name="minute" min="1" value="1" class="form-control"/>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">Minute</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div id="hourDiv" class="schedulingSection" style="display:none;">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label"><input type="radio" checked="checked" th:name="hourChecker" value="everyHour"/>Every</label>
+                                                        <div class="col-sm-2">
+                                                            <input type="number" th:id="everyHour" th:name="exactHour" min="1" value="1" class="form-control"/>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">Hour</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label"><input type="radio" th:name="hourChecker" value="startHour"/>Start at</label>
+
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control left-selector" th:name="hour" th:id="hour">
+                                                                <option th:each="idx :${#numbers.sequence(0,23)}" th:value="${idx}" th:text="${idx}"></option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select type="text" th:id="minSecond" th:name="hourMin" class="form-control">
+                                                                <option th:each="idx :${#numbers.sequence(0,59)}" th:value="${idx}" th:text="${idx}"></option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">Seconds</label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="dailyDiv" class="schedulingSection" style="display:none;">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label"><input type="radio" checked="checked" name="dailyChecker" value="everyDay"/>Every</label>
+
+                                                        <div class="col-sm-2">
+                                                            <input type="number" th:id="dailyDay" th:name="dayInterval" min="1" value="1" class="form-control"/>
+
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">day(s)</label>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label"><input type="radio" name="dailyChecker" value="weekDay"/>Every week day</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label">Start at</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control left-selector" th:name="dailyHour" th:id="hour">
+                                                                <option th:each="idx :${#numbers.sequence(0,23)}" th:value="${idx}" th:text="${idx}"></option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select type="text" th:id="minSecond" th:name="dailyMin" class="form-control">
+                                                                <option th:each="idx :${#numbers.sequence(0,59)}" th:value="${idx}" th:text="${idx}"></option>
+                                                            </select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">Seconds</label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="weekDiv" class="schedulingSection" style="display:none;">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Specify day of the Week</label>
+                                                    <div class="col-sm-4">
+                                                        <select multiple="multiple" class="form-control left-selector" th:id="weekDay" th:name="weekDay">
+                                                            <option value="SUN">Sunday</option>
+                                                            <option value="MON">Monday</option>
+                                                            <option value="TUE">Tuesday</option>
+                                                            <option value="WED">Wednessday</option>
+                                                            <option value="THU">Thurday</option>
+                                                            <option value="FRI">Friday</option>
+                                                            <option value="SAT">Saturday</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Start time</label>
+
+                                                    <div class="col-sm-4">
+                                                        <select class="form-control left-selector" th:name="weekHour"  th:class="col-sm-4" th:id="weekHour">
+                                                            <option th:each="idx :${#numbers.sequence(0,23)}" th:value="${idx}" th:text="${idx}"></option>
+                                                        </select>
+
+                                                        <select type="text" th:id="weekSecond" th:class="col-sm-3" th:name="weekSecond" class="form-control">
+                                                            <option th:each="idx :${#numbers.sequence(0,59)}" th:value="${idx}" th:text="${idx}"></option>
+
+                                                        </select>Seconds
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="monthDiv" class="schedulingSection " style="display:none;">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12" >
+                                                        <label class="control-label col-sm-2"><input type="radio" checked="checked" name="monthChecker" th:value="eachMonthDay"/>Day</label>
+                                                        <div class="col-sm-2">
+                                                            <input type="number" th:id="monthDay" th:name="monthDay" min="1" value="1" class="form-control"/>
+                                                        </div>
+
+                                                        <label class="control-label col-sm-1"> of every </label>
+                                                        <div class="col-sm-2">
+                                                            <input type="number" th:id="monthNum" th:name="monthNum" min="1" value="2" class="form-control"/>
+                                                        </div>
+                                                        <label class="control-label col-sm-2">month(s) </label>
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-2"><input type="radio" name="monthChecker" value="monthDayCart"/>The</label>
+                                                            <div class="col-sm-2">
+                                                                <select class="form-control  " name="monthCategory">
+                                                                    <option value="1">First</option>
+                                                                    <option value="2">Second</option>
+                                                                    <option value="3">Third</option>
+                                                                    <option value="4">Fourth</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select class="form-control" th:id="monthWeek" th:name="monthWeek">
+                                                                    <option value="SUN">Sunday</option>
+                                                                    <option value="MON">Monday</option>
+                                                                    <option value="TUE">Tuesday</option>
+                                                                    <option value="WED">Wednessday</option>
+                                                                    <option value="THU">Thurday</option>
+                                                                    <option value="FRI">Friday</option>
+                                                                    <option value="SAT">Saturday</option>
+                                                                </select>
+                                                            </div>
+                                                            <label class="control-label col-sm-2">of every</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="number" th:id="monthNumDesp" th:name="monthNumDesp" min="1" value="1" class="form-control"/>
+                                                            </div>
+                                                            <label class="control-label col-sm-2">month(s)</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label class="control-label col-sm-2">Start time</label>
+
+                                                            <div class="col-sm-2">
+                                                                <select class="form-control left-selector" th:name="monthHour" th:id="monthHour">
+                                                                    <option th:each="idx :${#numbers.sequence(0,23)}" th:value="${idx}" th:text="${idx}"></option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <select type="text" th:id="weekSecond" th:name="monthMinute" class="form-control">
+                                                                    <option th:each="idx :${#numbers.sequence(0,59)}" th:value="${idx}" th:text="${idx}"></option>
+
+                                                                </select>Seconds
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="yearDiv" class="schedulingSection" style="display:none;">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+
+                                                        <label class="col-sm-2 control-label"><input name="yearChecker" checked="checked" type="radio" th:value="perMonth" class=""/>Every</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control left-selector" th:id="yearMonth1" th:name="yearMonth1">
+                                                                <option value="1">January</option>
+                                                                <option value="2">February</option>
+                                                                <option value="3">March</option>
+                                                                <option value="4">April</option>
+                                                                <option value="5">May</option>
+                                                                <option value="6">June</option>
+                                                                <option value="7">July</option>
+                                                                <option value="8">August</option>
+                                                                <option value="9">September</option>
+                                                                <option value="10">October</option>
+                                                                <option value="11">November</option>
+                                                                <option value="12">December</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <input type="number" th:id="yearMonthNum" th:name="yearMonthNum" value="1" min="1" class="form-control"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label"><input type="radio"  name="yearChecker" th:value="yearSection"/>The</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control" name="yearCategory">
+                                                                <option value="1">First</option>
+                                                                <option value="2">Second</option>
+                                                                <option value="3">Third</option>
+                                                                <option value="4">Fourth</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control left-selector" th:id="yearMonthWeek" th:name="yearMonthWeek">
+                                                                <option value="SUN">Sunday</option>
+                                                                <option value="MON">Monday</option>
+                                                                <option value="TUE">Tuesday</option>
+                                                                <option value="WED">Wednessday</option>
+                                                                <option value="THU">Thurday</option>
+                                                                <option value="FRI">Friday</option>
+                                                                <option value="SAT">Saturday</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <label class="control-label col-sm-1">of</label>
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control left-selector" th:id="yearMonth2" th:name="yearMonth2">
+                                                                <option value="1">January</option>
+                                                                <option value="2">February</option>
+                                                                <option value="3">March</option>
+                                                                <option value="4">April</option>
+                                                                <option value="5">May</option>
+                                                                <option value="6">June</option>
+                                                                <option value="7">July</option>
+                                                                <option value="8">August</option>
+                                                                <option value="9">September</option>
+                                                                <option value="10">October</option>
+                                                                <option value="11">November</option>
+                                                                <option value="12">December</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label">Start time</label>
+
+                                                        <div class="col-sm-2">
+                                                            <select class="form-control left-selector" th:name="yearHour" th:id="yearHour">
+                                                                <option th:each="idx :${#numbers.sequence(0,23)}" th:value="${idx}" th:text="${idx}"></option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select type="text" th:id="yearMinute" th:name="yearMinute" class="form-control">
+                                                                <option th:each="idx :${#numbers.sequence(0,59)}" th:value="${idx}" th:text="${idx}"></option>
+
+                                                            </select>
+                                                        </div>
+                                                        <label class="col-sm-1 control-label">Seconds</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="buttonDiv" class="schedulingSection" style="display:none;">
+                                                <div class="form-group">
+                                                    <div class="col-sm-8 col-sm-offset-2">
+                                                        <!--<button class="btn btn-white" type="reset" id="cancel">Cancel</button>-->
+                                                        <button class="btn btn-primary" type="submit">Update</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ></div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<!-- /page content -->
+
+<th:block layout:fragment="scripts">
+
+<!--<script th:src="@{~/banks/vendors/datatables.net/js/jquery.dataTables.js}"></script>-->
+<!--<script th:src="@{~/banks/js/dataTables.select.js}"></script>-->
+<!--<script th:src="@{~/banks/js/dataTables.bootstrap.js}"></script>-->
+<!--<script th:src="@{~/banks/js/jquery.spring-friendly.min.js}"></script>-->
+
+<!-- Page-Level Scripts -->
+<script class="init" th:inline="javascript">
+    /*<![CDATA[*/
+    /*]]>*/
+
+    $(document).ready(
+
+            function () {
+                getCronDesc("account");
+                $('option').mousedown(function(e) {
+                    e.preventDefault();
+                    $(this).prop('selected', $(this).prop('selected') ? false : true);
+                    return false;
+                });
+                $('#buttonDiv').show();
+//                if($('#everySecond').is(':checked') == false){
+////                    $('#second').prop('disabled',true);
+//                }
+
+
+//                function disableCategory(category) {
+//                    if(category ==="second"){
+//                        alert($('#everySecond').is(':checked');
+//                    }
+//                }
+            }
+
+
+    );
+    $('#jobCategory').change(function () {
+        getCronDesc($(this).val());
+    });
+    function getCronDesc(category) {
+        $.ajax({
+            "url": "",
+            "type": "POST",
+            "data": {
+                category: category
+            }, success: function (result) {
+                console.log("the description "+result);
+//                    resetButton();
+                $('#curentCronExpr').html(result);
+            },
+            error: function (dd) {
+                console.log("error");
+//                return false;
+            }
+
+        });
+    }
+    $(function() {
+        // Makes sure the code contained doesn't run until
+        //     all the DOM elements have loaded
+        $('#scheduler').change(function(){
+            $('.schedulingSection').hide();
+            $('#' + $(this).val()).show();
+            if($(this).val() != '*'){
+                $('#buttonDiv').show();
+            }
+            if($(this).val()=="weekDiv"){
+//                $('#weekDiv').prop("required",true);
+                $('#weekDay').prop("required",true);
+
+            }else{
+                $('#weekDay').prop("required",false);
+
+            }
+        });
+
+    });
+    //    function disableCom(category) {
+    //        if($('#everySecond').is(':checked') == true){
+    ////            alert("checked");
+    //                    $('#second').prop('disabled',true);
+    //        }
+    //    }
+</script>
+
+
+
+</th:block>
+</html>

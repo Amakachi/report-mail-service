@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Bootstrap -->
+    <link th:href="@{~/banks/css/bootstrap.min.css}" rel="stylesheet"/>
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">-->
+    <!-- Font Awesome -->
+    <link th:href="@{~/banks/font-awesome/font-awesome.min.css}" rel="stylesheet"/>
+    <!-- NProgress -->
+    <link th:href="@{~/banks/vendors/nprogress/nprogress.css}" rel="stylesheet"/>
+    <link th:href="@{~/banks/css/select.bootstrap.css}" rel="stylesheet"/>
+    <!-- Custom Theme Style -->
+    <link th:href="@{~/banks/vendors/bootstrap-editable/css/bootstrap-editable.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{~/banks/css/custom.css}" rel="stylesheet"/>
+
+    <link th:href="@{~/banks/vendors/sweetalert/sweetalert.css}" rel="stylesheet"/>
+    <link th:href="@{~/banks/css/bootstrap-switch.min.css}" rel="stylesheet"/>
+    <link th:href="@{~/banks/vendors/switchery/switchery.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{~/banks/vendors/bootstrap-dialog/css/bootstrap-dialog.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{~/banks/css/coronation.css}" rel="stylesheet"/>
+    <title>Report Portal</title>
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <div class="clearfix"></div>
+                <div class="clearfix"></div>
+
+                <div  id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+
+                            <li ><a><i class="fa fa-table"></i><span style="font-size: 20px; margin-top: 10px">Reports</span> <span class="fa"></span></a>
+<!--                                <ul class="nav child_menu">-->
+                                <ul  class="child_menu" >
+                                    <div style="margin-left: 15px; margin-bottom: 10px">
+                                        <li ><a href="/report/listview"><span style="font-size: 13px">Add Report</span></a></li>
+                                    </div>
+                                    <div style="margin-left: 15px; margin-bottom: 10px">
+                                        <li><a href="/"><span style="font-size: 13px">Schedule Report</span></a></li>
+                                    </div>
+                                    <div style="margin-left: 15px">
+                                        <li><a href="/report/all-reports"><span style="font-size: 13px">View Reports</span></a></li>
+                                    </div>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="right_col" role="main" layout:fragment="content">
+        </div>
+
+            <!-- jQuery -->
+            <script th:src="@{~/banks/vendors/jquery/jquery.js}"></script>
+            <!-- Bootstrap -->
+            <script th:src="@{~/banks/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+            <!-- FastClick -->
+            <script th:src="@{~/banks/vendors/fastclick/lib/fastclick.js}"></script>
+            <!-- NProgress -->
+            <script th:src="@{~/banks/vendors/nprogress/nprogress.js}"></script>
+
+<!--            <script th:src="@{~/banks/vendors/bootstrap-editable/js/bootstrap-editable.min.js}"></script>-->
+            <script th:src="@{~/banks/vendors/switchery/switchery.min.js}"></script>
+<!--            <script th:src="@{~/banks/js/bootstrap-editable-custom.js}"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!--        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous">-->
+<!--        </script>-->
+
+        <!-- Custom Theme Scripts -->
+<!--            <script th:src="@{~/banks/js/custom.js}"></script>-->
+            <script th:src="@{~/banks/js/bootstrap-switch.min.js}"></script>
+            <script th:src="@{~/banks/vendors/bootstrap-notify/bootstrap-notify.js}"></script>
+            <script th:src="@{~/banks/js/coronation.js}"></script>
+<!--            <script th:src="@{~/banks/vendors/datatables.net/js/jquery.dataTables.js}"></script>-->
+<!--            <script th:src="@{~/banks/js/dataTables.select.js}"></script>-->
+<!--            <script th:src="@{~/banks/js/dataTables.input.js}"></script>-->
+            <script th:src="@{~/banks/js/jquery.spring-friendly.min.js}"></script>
+            <script th:src="@{~/banks/vendors/sweetalert/sweetalert.min.js}"></script>
+<!--            <script th:src="@{~/banks/vendors/bootstrap-dialog/js/bootstrap-dialog.js}"></script>-->
+<!--            <script th:src="@{~/banks/js/dataTables.bootstrap.js}"></script>-->
+<!--            <script th:src="@{~/banks/js/momentMin.js}"></script>-->
+<!--            <script src="jquery.email.multiple.js"></script>-->
+<!--            <script th:src="@{~/banks/js/session.js}"></script>-->
+
+            <script>
+                // $(fileName).ready(function(){
+                //     $('[data-toggle="tooltip"]').tooltip();
+                // });
+
+            </script>
+
+        <th:block layout:fragment="scripts">
+        </th:block>
+
+
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+</body>
+</html>

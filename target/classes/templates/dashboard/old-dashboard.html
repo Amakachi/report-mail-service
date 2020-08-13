@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<link rel="stylesheet" href="../../static/assets/css/app.css">
+<link rel="stylesheet" type="text/css" th:href="@{~/assets/css/fcmb.css}">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<style>
+    .card-180{
+        border-radius: 5px!important;
+        max-width: 217px!important;
+        min-width: 215px!important;
+    }
+
+    .theme-color{
+        color:  #513192!important;
+        text-shadow: 0 0 2px rgba(81, 49, 146, 0.73) !important;
+    }
+
+    .dash-card{
+        flex: 0 0 16.66667%;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 16.6667%;
+        max-width: 16.66667%;
+    }
+
+</style>
+
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_head.html -->
+    <!-- partial -->
+    <!-- partial:partials/_sidebar.html -->
+    <!-- partial -->
+    <div class="page has-sidebar-left">
+        <!-- partial:partials/_searchBar.html -->
+        <!-- partial -->
+        <div class="navbar navbar-expand d-flex navbar-dark justify-content-between bd-navbar shadow">
+            <div class="relative">
+                <div class="d-flex">
+
+                    <div class="d-none d-md-block">
+                        <h1 class="nav-title mt-0 ml-5 font-weight-normal s-24" style="text-shadow: 0 0 2px rgba(81, 49, 146, 0.73)!important; color:#513192!important;">
+                            Dashboard
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <!-- partial:partials/_navbar.html -->
+            <!-- partial -->
+        </div>
+        <!--<div class="container-fluid animatedParent animateOnce mb-3">-->
+        <div class="container-fluid p-0">
+            <!--<div class="animated fadeInUpShort">-->
+            <div class="col-md-12 p-0">
+                <div class="card">
+
+                    <!--Card Header text-->
+                    <div class=" white pt-3 mt-3 card-block">
+                        <!--<h4 class="text-center theme-color" style="text-shadow: 0 0 2px rgba(81, 49, 146, 0.73)!important; color:#513192!important;"> CURRENT STATS </h4>-->
+                    </div>
+                    <!--Card Header end-->
+
+                    <div class="card-body p-0">
+                        <div class="col-md-12 p-2 center">
+                            <div class="col-md-10 d-flex justify-content-around mx-auto mt-5 mb-3" style="height:200px;">
+                                <div class="panel-body p-0 col-md-3 shadow card-180" style="border-radius:10%;">
+                                    <div class="p-0 mt-4 center">
+                                        <div class="col-md-3 p-0 center mb-3">
+                                            <i class="fa fa-coins s-48" style="color:#513192; "></i>
+                                        </div>
+                                        <h5 class="font-weight-bold text-center s-14">Deposits</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;">
+                                            <span class="counter" th:text="${statistics.numOfDeposits}">0</span>
+                                        </h1>
+                                    </div>
+
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180" style="border-radius:10%;">
+                                    <div class="p-0 mt-4 center">
+                                        <div class="col-md-3 p-0 center mb-3">
+                                            <i class="fa fa-money-bill s-48" style="color:#513192;"></i>
+                                        </div>
+                                        <h5 class="font-weight-bold text-center s-14">Cash withdrawals (On-Us)</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;" th:text="${statistics.numOfOnUsWithdrawal}">0</h1>
+                                    </div>
+
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180"  style="border-radius:10%;">
+                                    <div class="p-0 mt-4 center">
+                                        <div class="col-md-3 p-0 center mb-3">
+                                            <i class="fa fa-credit-card s-48" style="color:#513192;"></i>
+                                        </div>
+                                        <h5 class="font-weight-bold text-center s-14">Card withdrawals (Not-On-Us)</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;" th:text="${statistics.numOfNotOnUsWithdrawal}">0</h1>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10 d-flex justify-content-around mx-auto mt-2 mb-3 " style="height:200px">
+                                <div class="p-0 panel-body shadow col-md-3 card-180"  style="border-radius:10%;">
+                                    <div class="p-0 mt-4 center">
+                                        <div class="col-md-3 p-0 center mb-3">
+                                            <i class="fa fa-exchange-alt s-48" style="color:#513192;"></i>
+                                        </div>
+                                        <h5 class="font-weight-bold text-center s-14">Inter bank transfers</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;" th:text="${statistics.numOfInterBankTransfers}">0</h1>
+                                    </div>
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180"  style="border-radius:10%;">
+                                    <div class="p-0 mt-4 center">
+                                        <div class="col-md-3 p-0 center mb-3">
+                                            <i class="fa fa-recycle s-48" style="color:#513192;"></i>
+                                        </div>
+                                        <h5 class="font-weight-bold text-center s-14">Intra bank transfers</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color " style="color:#513192!important;" th:text="${statistics.numOfIntraBankTransfers}">0</h1>
+                                    </div>
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180"  style="border-radius:10%;">
+                                    <div class="p-0 mt-4 center">
+                                        <div class="col-md-3 p-0 center mb-3">
+                                            <i class="fa fa-money-check-alt  s-48" style="color:#513192!important;"></i>
+                                        </div>
+                                        <h5 class="font-weight-bold text-center s-14">Bill payments</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;" th:text="${statistics.numOfBillPayments}">0</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Main cards-->
+                           <!-- <div class="col-md-12 d-flex justify-content-between mx-auto mt-3 mb-3" style="height:200px">
+                                <div class="panel-body p-0 col-md-3 shadow card-180 " style=" border-radius:15px;">
+                                    <div class="p-0 mt-5 center">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <h5 class="font-weight-bold text-center s-14">Deposits</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;">
+                                            <span class="counter">675</span>
+                                        </h1>
+                                    </div>
+
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180" style=" border-radius:15px;">
+                                    <div class="p-0 mt-5 center">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        <h5 class="font-weight-bold text-center s-14">Cash withdrawals</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;">675</h1>
+                                    </div>
+
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180" style=" border-radius:5px;">
+                                    <div class="p-0 center mt-5">
+                                        <i class="fa fa-shopping-cart" style="color:black; border-radius:5px;"></i>
+                                        <h5 class="font-weight-bold text-center s-14">Card withdrawals</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;">300</h1>
+
+                                    </div>
+                                </div>
+                                <div class="p-0 panel-body shadow col-md-3 card-180" style=" border-radius:5px;">
+                                    <div class="p-0 center mt-5">
+                                        <span class="fa fa-shopping-cart " style="color:#513192;"></span>
+                                        <h5 class="font-weight-bold text-center s-14">Card withdrawals</h5>
+                                        <h1 class="s-48 font-weight-normal text-center theme-color" style="color:#513192!important;">300</h1>
+
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--Main card end-->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- partial:partials/_foot.html -->
+            <!-- partial -->
+            <!---->
+
+        </div>
+    </div>
+</div>
+    <th:block layout:fragment="scripts">
+        <!--<script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>-->
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfBe7UuP98bQLgQFHJN-9TSE4EtzNtCzc&callback=initMap">
+        </script>
+
+
+        <script>
+            function initMap() {
+                var locations = [
+                    ['Agent: 3lagent <br/>Trans :Balance Enquiry <br/>amount:N/A <br><!--Location :Kosofe-->', 6.56164, 3.38425, 4],
+                    ['Agent: 3lagent <br/>Trans :Fund Transfer <br/>amount:N/A <br><!--3Line Card Ltd-->', 6.427432, 3.412213, 5],
+                    ['Agent: 3lagent <br/>Trans :Cash Withdrawal <br/>amount:N/A <br><!--Ikorodu Lagos-->', 6.61941, 3.51045, 3],
+                    ['Agent: 3lagent <br/>Trans :Thrift Deposit <br/>amount:N/A <br><!--Apapa lagos-->', 6.45528, 3.36408, 2],
+                    ['Agent: 3lagent <br/>Trans :Airtime Recharge <br/>amount:N/A <br><!--Lekki Lagos-->', 6.45898, 3.60152, 1]
+                    //${info.geotags}
+                ];
+
+                var map = new google.maps.Map(fileName.getElementById('map'), {
+                    zoom: 6,
+                    //center: new google.maps.LatLng(6.427432, 3.412213),
+                    center: new google.maps.LatLng(/*${info.extra.get("coordinatecenter")}*/ 6, 9),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+                var marker, i;
+
+                for (i = 0; i < locations.length; i++) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        //animation: google.maps.Animation.BOUNCE,
+                        map: map
+                    });
+                    var infowindow = new google.maps.InfoWindow();
+                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                return function () {
+                                    infowindow.setContent(locations[i][0]);
+                                    infowindow.open(map, marker);
+                                }
+                            }
+                        )(marker, i)
+                    );
+                }
+
+                // Automatically center the map fitting all markers on the screen
+                //map.fitBounds(bounds);
+                var mapObject = new google.maps.Map(fileName.getElementById("map"), map);
+            }
+
+        </script>
+
+    </th:block>
+</body>
+</html>
