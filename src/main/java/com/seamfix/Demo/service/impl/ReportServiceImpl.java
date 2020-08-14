@@ -2,7 +2,9 @@ package com.seamfix.Demo.service.impl;
 
 import com.seamfix.Demo.dto.ReportDTO;
 import com.seamfix.Demo.exception.StorageException;
+import com.seamfix.Demo.model.CronJobExpression;
 import com.seamfix.Demo.model.Report;
+import com.seamfix.Demo.repository.CronJobExpressionRepo;
 import com.seamfix.Demo.repository.ReportRepository;
 import com.seamfix.Demo.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,24 @@ public class ReportServiceImpl implements ReportService {
     private String path;
 
     @Autowired
+    CronJobExpressionRepo cronJobExpressionRepo;
+
+    @Autowired
     ReportRepository reportRepository;
     @Override
     public List<Report> getAllReports() {
         List<Report> reportList = reportRepository.findAll();
         return reportList;
+    }
+    @Override
+    public List<CronJobExpression> getAllScheduledReports(){
+        List<CronJobExpression> cronJobExpressionList = cronJobExpressionRepo.findAll();
+        return cronJobExpressionList;
+    }
+
+    @Override
+    public Report findReportByFileName(String fileName){
+       return reportRepository.findByFileName(fileName);
     }
 
     @Override

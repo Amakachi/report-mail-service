@@ -34,27 +34,44 @@ public class CronJobUtils {
         Map<String,String> expression = new HashMap<>();
         String desc = "Every ";
         if(minute!=null && !minute.equalsIgnoreCase("")) {
-            String exrInit = "0 0/";
-            StringBuilder builderExprVal = new StringBuilder(exrInit);
+//            String exrInit = "* 0/";
+            StringBuilder builderExprVal = new StringBuilder();
             StringBuilder builderExprDesc = new StringBuilder(desc);
             builderExprVal.append(minute);
-            builderExprVal.append(" * 1/1 * ? *");
+            builderExprVal.append(" * * ? * *");
             builderExprDesc.append(minute +pluralizeWordChecker(" minute",minute));
             expression.put("desc",builderExprDesc.toString());
             expression.put("value",builderExprVal.toString());
             System.out.println("minutes expression and desc " + builderExprVal +desc);
             return expression;
         }
-
         return null;
     }
+//    public static Map<String,String> getMinuteExpression(String minute){
+//        Map<String,String> expression = new HashMap<>();
+//        String desc = "Every ";
+//        if(minute!=null && !minute.equalsIgnoreCase("")) {
+//            String exrInit = "* 0/";
+//            StringBuilder builderExprVal = new StringBuilder(exrInit);
+//            StringBuilder builderExprDesc = new StringBuilder(desc);
+//            builderExprVal.append(minute);
+//            builderExprVal.append(" * 1/1 * ? *");
+//            builderExprDesc.append(minute +pluralizeWordChecker(" minute",minute));
+//            expression.put("desc",builderExprDesc.toString());
+//            expression.put("value",builderExprVal.toString());
+//            System.out.println("minutes expression and desc " + builderExprVal +desc);
+//            return expression;
+//        }
+//
+//        return null;
+//    }
     public static Map<String,String> getHourExpression(String hourChecker, String exactHour, String hour, String minute){
         Map<String,String> expression = new HashMap<>();
         String exrInit = "0 ";
         StringBuilder builderExprVal = new StringBuilder(exrInit);
         StringBuilder builderExprDesc = new StringBuilder("");
         if(hourChecker.equalsIgnoreCase("everyHour")){
-            builderExprVal.append("0 0/"+exactHour);
+            builderExprVal.append("00 "+exactHour);
             builderExprDesc.append("Every ");
             builderExprDesc.append(exactHour);
             builderExprDesc.append(pluralizeWordChecker(" hour",exactHour));
@@ -71,7 +88,7 @@ public class CronJobUtils {
             builderExprVal.append(minute);
             builderExprVal.append(" "+hour);
         }
-        builderExprVal.append(" 1/1 * ? *");
+        builderExprVal.append(" ? * *");
         expression.put("desc",builderExprDesc.toString());
         expression.put("value",builderExprVal.toString());
 //        logger.info("hour expression {} and desc {}",builderExprVal,builderExprDesc);

@@ -82,20 +82,23 @@
                                         <th>Date</th>
 
                                     </tr>
+
                                     </thead>
                                     <tbody>
+                                    <tr class="no-b" th:each="report: ${reportlist}">
+
+                                        <td>
+                                            <h6 th:text="${report.title}"></h6>
+                                        </td>
+                                        <td>
+                                            <h6 th:text="${report.fileName}"></h6>
+                                        </td>
+                                        <td>
+                                            <h6 th:text="${report.date}"></h6>
+                                        </td>
 
 
                                     </tbody>
-<!--                                    <tfoot>-->
-<!--                                    <tr>-->
-<!--                                        <th>Title</th>-->
-<!--                                        <th>Document</th>-->
-<!--                                        <th>Date</th>-->
-
-
-<!--                                    </tr>-->
-<!--                                    </tfoot>-->
                                 </table>
 
                             </div>

@@ -1,12 +1,17 @@
 package com.seamfix.Demo.model;
 
+import lombok.Data;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
 import java.util.Date;
 
 
 @Entity
+@Data
 public class CronJobExpression {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,67 +19,11 @@ public class CronJobExpression {
     private String cronExpression;
     private Date createdOn;
     private String username;
-    private String flag;
+    private String flag="N";
+    private String scheduled="N";
     private String cronExpressionDesc;
     private String category;
+    @OneToOne
+    private Report report;
 
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
-
-    public String getCronExpression() {
-        return cronExpression;
-    }
-
-    public void setCronExpression(String cronExpression) {
-        this.cronExpression = cronExpression;
-    }
-
-    public Date getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getCronExpressionDesc() {
-        return cronExpressionDesc;
-    }
-
-    public void setCronExpressionDesc(String cronExpressionDesc) {
-        this.cronExpressionDesc = cronExpressionDesc;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "CronJobExpression{" +
-                "cronExpression='" + cronExpression + '\'' +
-                ", createdOn=" + createdOn +
-                ", username='" + username + '\'' +
-                ", flag='" + flag + '\'' +
-                ", cronExpressionDesc='" + cronExpressionDesc + '\'' +
-                ", category='" + category + '\'' +
-                '}';
-    }
 }

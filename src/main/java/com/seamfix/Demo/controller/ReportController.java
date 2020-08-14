@@ -1,6 +1,7 @@
 package com.seamfix.Demo.controller;
 
 import com.seamfix.Demo.dto.ReportDTO;
+import com.seamfix.Demo.model.CronJobExpression;
 import com.seamfix.Demo.model.Report;
 import com.seamfix.Demo.service.ReportService;
 import com.seamfix.Demo.service.impl.ReportServiceImpl;
@@ -26,10 +27,14 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
+
+
     @ModelAttribute
     public void init(Model model) {
         List<Report> reports = reportService.getAllReports();
+        List<CronJobExpression> scheduledReports = reportService.getAllScheduledReports();
         model.addAttribute("reportlist", reports);
+        model.addAttribute("scheduledList", scheduledReports);
     }
 
     @GetMapping("/")
@@ -61,16 +66,11 @@ public class ReportController {
     }
 
     @GetMapping(path = "report/all")
-    public @ResponseBody List<Report> getReports()
+    public @ResponseBody List<CronJobExpression> getReports()
     {
-        return reportService.getAllReports();
+        return reportService.getAllScheduledReports();
     }
 
-    @GetMapping(path = "report/all-reports")
-    public String getAllReports(Model model)
-    {
-        return "dashboard/view-report";
-    }
 
     @GetMapping("report/{id}/details")
     public String getReportById(@PathVariable Long id,Model model){

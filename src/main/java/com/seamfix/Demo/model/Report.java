@@ -15,7 +15,6 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String fileName;
     private String title;
     private Date date;
