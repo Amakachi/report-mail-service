@@ -30,7 +30,7 @@ public class SchedularServiceImpl implements SchedularService {
     @Autowired
     private ScheduleTaskService scheduleTaskService;
 
-    @Value("${image.path}")
+    @Value("${document.path}")
     private String path;
 
     @Override

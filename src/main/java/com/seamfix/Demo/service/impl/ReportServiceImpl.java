@@ -27,7 +27,7 @@ import java.util.List;
 @Service
 public class ReportServiceImpl implements ReportService {
 
-    @Value("${image.path}")
+    @Value("${document.path}")
     private String path;
 
     @Autowired
@@ -35,6 +35,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     ReportRepository reportRepository;
+
     @Override
     public List<Report> getAllReports() {
         List<Report> reportList = reportRepository.findAll();
@@ -61,7 +62,8 @@ public class ReportServiceImpl implements ReportService {
 
     public String uploadFile(MultipartFile file) {
         String uploadedFileName = "";
-
+        File tempFile = new File(path);
+        if (!tempFile.exists()) tempFile.mkdirs();
 
         if (file.isEmpty()) {
             System.out.println("file is empty");
