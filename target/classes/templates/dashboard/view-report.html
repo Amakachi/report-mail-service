@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 
 <!-- page content -->
-<div class="right_col" role="main" layout:fragment="content">
+<div class="right_col" style="height: 100vh" role="main" layout:fragment="content">
     <div class="">
         <div class="page-title">
             <div class="title_left">
@@ -33,6 +33,7 @@
                                         <th>Date created</th>
                                         <th>Scheduling time</th>
                                         <th>Title</th>
+                                        <th>Cancel</th>
 
                                     </tr>
                                     </thead>
@@ -83,7 +84,8 @@
                   {"data": "username"},
                   {"data": "createdOn"},
                   {"data": "cronExpressionDesc"},
-                  {"data": "report"}
+                  {"data": "report.title"},
+                  {"data": null}
               ],
               "columnDefs": [
 
@@ -98,6 +100,15 @@
                           return moment(data).format("DD/MM/YYYY hh:mm a");
                       }
 
+                  },
+                  {
+                      "targets": 6,
+                      "data": null,
+                      "ordering": false,
+                      "render": function (data, type, row, meta) {
+                          return "<a style='color: #5a2c82' title='Cancel Report' href='/report/delete/" + row.id +"' class='btn btn-white btn-sm'><i class='fa fa-eye dt-body-center' style='text-align:center; margin:0 auto;'></i> Cancel</a>"
+
+                      }
                   }
               ]
 

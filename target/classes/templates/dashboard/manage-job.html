@@ -7,7 +7,7 @@
 
 
 <!-- page content -->
-<div class="right_col" role="main" layout:fragment="content">
+<div class="right_col" style="height: 100vh" role="main" layout:fragment="content">
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
@@ -55,15 +55,15 @@
 
                                         <form method="post" action="/manage/job" class="form-horizontal " th:object="${reportDTO}">
 
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label for="datetimepicker" class="control-label col-sm-2 ">Select date and time</label>
-                                                    <div class="col-md-6">
-                                                        <!--                                                            <input class="form-control col-sm-2" type="datetime-local" value="2018-08-19T13:45:00" id="example-datetime-local-input">-->
-                                                        <input id="datetimepicker" type="text" class="form-control" >
-                                                    </div>
-                                                </div>
-                                            </div>
+<!--                                            <div class="form-group">-->
+<!--                                                <div class="col-md-12">-->
+<!--                                                    <label for="datetimepicker" class="control-label col-sm-2 ">Select date and time</label>-->
+<!--                                                    <div class="col-md-6">-->
+<!--                                                        &lt;!&ndash;                                                            <input class="form-control col-sm-2" type="datetime-local" value="2018-08-19T13:45:00" id="example-datetime-local-input">&ndash;&gt;-->
+<!--                                                        <input id="datetimepicker" type="text" class="form-control" >-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
 
                                             <div class="form-group">
                                                 <div class="col-md-12">
@@ -74,21 +74,7 @@
                                                 </div>
                                             </div>
 
-<!--                                            &nbsp;&nbsp;-->
-<!--                                            <div class="form-group">-->
-<!--                                                <div class="col-md-12">-->
 
-<!--                                                    <label class="control-label col-sm-2">Repeat</label>-->
-<!--                                                    <div class="col-sm-6">-->
-<!--                                                        <select class="form-control">-->
-<!--                                                            <option value="Yes">Yes</option>-->
-<!--                                                            <option value="No">No</option>-->
-<!--                                                        </select>-->
-<!--                                                    </div>-->
-
-<!--                                                </div>-->
-
-<!--                                            </div>-->
                                             &nbsp;&nbsp;
                                             <div class="form-group">
                                                 <div class="col-md-12">
@@ -142,7 +128,7 @@
                                             <div id="minuteDiv" class="schedulingSection">
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="col-sm-2 control-label">Every</label>
+                                                        <label class="col-sm-2 control-label">For </label>
                                                         <div class="col-sm-2">
                                                             <input type="number" th:id="minute" th:name="minute" min="1" value="1" class="form-control"/>
                                                         </div>
@@ -155,7 +141,7 @@
 
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="col-sm-2 control-label"><input type="radio" checked="checked" th:name="hourChecker" value="everyHour"/>Every</label>
+                                                        <label class="col-sm-2 control-label"><input type="radio" checked="checked" th:name="hourChecker" value="everyHour"/>For</label>
                                                         <div class="col-sm-2">
                                                             <input type="number" th:id="everyHour" th:name="exactHour" min="1" value="1" class="form-control"/>
                                                         </div>
@@ -184,7 +170,7 @@
                                             <div id="dailyDiv" class="schedulingSection" style="display:none;">
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="col-sm-2 control-label"><input type="radio" checked="checked" name="dailyChecker" value="everyDay"/>Every</label>
+                                                        <label class="col-sm-2 control-label"><input type="radio" checked="checked" name="dailyChecker" value="everyDay"/>For</label>
 
                                                         <div class="col-sm-2">
                                                             <input type="number" th:id="dailyDay" th:name="dayInterval" min="1" value="1" class="form-control"/>
@@ -197,7 +183,7 @@
 
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="col-sm-2 control-label"><input type="radio" name="dailyChecker" value="weekDay"/>Every week day</label>
+                                                        <label class="col-sm-2 control-label"><input type="radio" name="dailyChecker" value="weekDay"/>For week day</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -321,7 +307,7 @@
                                                 <div class="form-group">
                                                     <div class="col-md-12">
 
-                                                        <label class="col-sm-2 control-label"><input name="yearChecker" checked="checked" type="radio" th:value="perMonth" class=""/>Every</label>
+                                                        <label class="col-sm-2 control-label"><input name="yearChecker" checked="checked" type="radio" th:value="perMonth" class=""/>For</label>
                                                         <div class="col-sm-2">
                                                             <select class="form-control left-selector" th:id="yearMonth1" th:name="yearMonth1">
                                                                 <option value="1">January</option>

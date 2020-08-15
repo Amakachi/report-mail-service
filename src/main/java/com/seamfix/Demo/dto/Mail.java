@@ -32,7 +32,6 @@ public class Mail  {
 
     private boolean sent = false;
 
-    private String agentId;
 
     @Lob
     private String failureReason ;
@@ -114,11 +113,4 @@ public class Mail  {
         this.lastSent = lastSent;
     }
 
-    public String getAgentId() {
-        return agentId;
-    }
-
-    public void setAgentId(String agentId) {
-        this.agentId = agentId;
-    }
 }

@@ -4,12 +4,14 @@ import com.seamfix.Demo.model.CronJobExpression;
 import com.seamfix.Demo.model.Report;
 import com.seamfix.Demo.repository.CronJobExpressionRepo;
 
+import com.seamfix.Demo.service.MailService;
 import com.seamfix.Demo.service.ReportService;
 import com.seamfix.Demo.service.SchedularService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,7 +24,14 @@ public class SchedularServiceImpl implements SchedularService {
     CronJobExpressionRepo cronJobExpressionRepo;
 
     @Autowired
-    ReportService reportService;
+    private ReportService reportService;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private ScheduleTaskService scheduleTaskService;
+
+    @Value("${image.path}")
+    private String path;
 
     @Override
     public void keepCronJobEprsDetials(String username, String cronExpression, String cronExprDesc, String category){
@@ -33,55 +42,19 @@ public class SchedularServiceImpl implements SchedularService {
         cronJobExpression.setCronExpressionDesc(cronExprDesc);
         cronJobExpression.setCategory(category);
         cronJobExpression.setReport(reportService.findReportByFileName(category));
-//        JobDetail jobDetail = buildJobDetail(cronJobExpression);
-//        Trigger trigger = buildJobTrigger(jobDetail, cronJobExpression);
-//        scheduler.scheduleJob(jobDetail, trigger);
-//
-//        buildJobDetail(cronJobExpression);
         cronJobExpressionRepo.save(cronJobExpression);
+        ScheduleTask scheduleTask = new ScheduleTask(cronJobExpression, mailService, path, cronJobExpressionRepo);
+        scheduleTaskService.addTaskToScheduler(cronJobExpression.getId(), scheduleTask, cronJobExpression.getCronExpression());
     }
     @Override
-    public void deleteRunningJob(String category)  {
-        CronJobExpression cronJobExpression = cronJobExpressionRepo.findLastByFlagAndCategory("Y",category);
-        System.out.println("the job to be deleted {}"+cronJobExpression);
-        if (cronJobExpression != null){
+    public void deleteRunningJob(Long id)  {
+        if (id != null){
 //            logger.info("about deleting");
-            cronJobExpression.setFlag("N");
-            cronJobExpressionRepo.save(cronJobExpression);
+            scheduleTaskService.removeTaskFromScheduler(id);
+            cronJobExpressionRepo.deleteById(id);
+
         }
     }
 
-//    @Override
-//    public String getCurrentExpression(String category) {
-//        CronJobExpression cronJobExpression = cronJobExpressionRepo.findLastByFlagAndCategory("Y",category);
-//
-//        return cronJobExpression.getCronExpression();
-//       }
 
-
-
-//    private JobDetail buildJobDetail(CronJobExpression cronJobExpression) {
-//        JobDataMap jobDataMap = new JobDataMap();
-//
-//        jobDataMap.put("email", cronJobExpression.getUsername());
-//        jobDataMap.put("subject", "");
-//
-//
-//        return JobBuilder.newJob(EmailJob.class)
-//                .withIdentity(UUID.randomUUID().toString(), "email-jobs")
-//                .withDescription("Send Email Job")
-//                .usingJobData(jobDataMap)
-//                .storeDurably()
-//                .build();
-//    }
-//
-//    private Trigger buildJobTrigger(JobDetail jobDetail, CronJobExpression cronJobExpression) {
-//        return TriggerBuilder.newTrigger()
-//                .forJob(jobDetail)
-//                .withIdentity(jobDetail.getKey().getName(), "email-triggers")
-//                .withDescription("Send Email Trigger")
-//                .withSchedule(cronSchedule(cronJobExpression.getCronExpression()))
-//                .forJob("myJob", "group1")
-//                .build();
-//    }
 }

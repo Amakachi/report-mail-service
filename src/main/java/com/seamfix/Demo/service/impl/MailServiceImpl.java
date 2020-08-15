@@ -49,7 +49,7 @@ public class MailServiceImpl implements MailService {
         helper.setTo(to);
        helper.setSubject(subject);
         helper.setText(text);
-
+// where ?
         FileSystemResource file
                 = new FileSystemResource(new File(pathToAttachment));
         helper.addAttachment("Report", file);
@@ -66,8 +66,8 @@ public class MailServiceImpl implements MailService {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("sylvicruza@gmail.com");
-        mailSender.setPassword("centifeanyi");
+        mailSender.setUsername("daniclaire97@gmail.com");
+        mailSender.setPassword("p@55w0rd#");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
